@@ -1,12 +1,13 @@
 program binconvert
     implicit none
-    integer :: n,decimal, ierr
-    character(len=128) :: binary
+    integer :: n,decimal, ierr, i
+    character(len=32) :: binary, binary2
     character(len=100) :: arg
 
     n = 0
     decimal = 0
     binary = ""
+    binary2 = ""
 
     print *, "Binary to Decimal Converter"
 
@@ -41,7 +42,13 @@ program binconvert
             decimal = decimal / 2
         end do
 
-        print *, "Binary: ", binary
+        n = len_trim(binary)
+        do i = 1,128-n
+            binary2(i:i) = "0"
+        end do
+
+        binary2(len_trim(binary2)-n+1:) = binary
+        print *, "Binary: ", binary2(1:8), " ", binary2(9:16), " ", binary2(17:24), " ", binary2(25:32)
 
     end if
 end program binconvert
