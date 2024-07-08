@@ -6,7 +6,7 @@ program binconvert
 
     n = 0
     decimal = 0
-    binary = ""
+    binary = " "
     binary2 = ""
 
     print *, "Binary to Decimal Converter"
@@ -35,8 +35,18 @@ program binconvert
         do while (decimal .gt. 0)
             if (mod(decimal, 2) .eq. 0) then
                 binary = "0" // binary
+                ! n = len_trim(binary) + 1
+                ! print *, "n: ", n
+                ! binary(n:) = "0"
+                ! print *, "Binary: ", binary
+                ! !binary(len_trim(binary)+1:) = "0"
             else
                 binary = "1" // binary
+                ! n = len_trim(binary) + 1
+                ! print *, "n: ", n
+                ! binary(n:) = "1"
+                ! print *, "Binary: ", binary
+                ! !binary(len_trim(binary)+1:) = "1"
             end if
         
             decimal = decimal / 2
@@ -49,6 +59,7 @@ program binconvert
 
         binary2(len_trim(binary2)-n+1:) = binary
         print *, "Binary: ", binary2(1:8), " ", binary2(9:16), " ", binary2(17:24), " ", binary2(25:32)
+        !print *, "Binary: ", binary
 
     end if
 end program binconvert
