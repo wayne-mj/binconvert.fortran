@@ -6,8 +6,9 @@ program binconvert
 
     n = 0
     decimal = 0
-    binary = ""
+    binary = "00000000000000000000000000000000"
     binary2 = ""
+    i = 1
 
     print *, "Binary to Decimal Converter"
 
@@ -32,24 +33,27 @@ program binconvert
             binary = "0"
         end if
 
-        do while (decimal .gt. 0)
+        do while (decimal .gt. 0 .and. i .le. 32)
             if (mod(decimal, 2) .eq. 0) then
                 !binary = "0" // binary
-                n = len_trim(binary) + 1
+                !n = len_trim(binary) + 1
                 !print *, "n: ", n
-                binary(n:) = "0"
+                !binary(n:) = "0"
+                binary(i:i) = "0"
                 !print *, "Binary: ", binary
                 ! !binary(len_trim(binary)+1:) = "0"
             else
                 !binary = "1" // binary
-                n = len_trim(binary) + 1
+                !n = len_trim(binary) + 1
                 !print *, "n: ", n
-                binary(n:) = "1"
+                !binary(n:) = "1"
+                binary(i:i) = "1"
                 !print *, "Binary: ", binary
                 ! !binary(len_trim(binary)+1:) = "1"
             end if
         
             decimal = decimal / 2
+            i =i +1
         end do
 
         do i = 1,len_trim(binary)
@@ -58,7 +62,7 @@ program binconvert
 
         !print *, "Reversed: ", reversed
 
-        n = len_trim(adjustl(reversed))
+        !n = len_trim(adjustl(reversed))
 
         !print *, "n: ", n
         !print *, "Reversed: ", reversed, "*"
@@ -70,7 +74,7 @@ program binconvert
 
         !binary2(len_trim(binary2)-n+1:) = trim(reversed)
         !print *, "Binary: ", binary2(1:8), " ", binary2(9:16), " ", binary2(17:24), " ", binary2(25:32)
-        print *, "Binary: ", reversed
+        print *, "Binary: ", reversed(1:8), " ", reversed(9:16), " ", reversed(17:24), " ", reversed(25:32)
 
     end if
 end program binconvert
