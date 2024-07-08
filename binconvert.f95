@@ -1,12 +1,12 @@
 program binconvert
     implicit none
     integer :: n,decimal, ierr, i
-    character(len=32) :: binary, binary2
+    character(len=32) :: binary, binary2, reversed
     character(len=100) :: arg
 
     n = 0
     decimal = 0
-    binary = " "
+    binary = ""
     binary2 = ""
 
     print *, "Binary to Decimal Converter"
@@ -34,32 +34,43 @@ program binconvert
 
         do while (decimal .gt. 0)
             if (mod(decimal, 2) .eq. 0) then
-                binary = "0" // binary
-                ! n = len_trim(binary) + 1
-                ! print *, "n: ", n
-                ! binary(n:) = "0"
-                ! print *, "Binary: ", binary
+                !binary = "0" // binary
+                n = len_trim(binary) + 1
+                !print *, "n: ", n
+                binary(n:) = "0"
+                !print *, "Binary: ", binary
                 ! !binary(len_trim(binary)+1:) = "0"
             else
-                binary = "1" // binary
-                ! n = len_trim(binary) + 1
-                ! print *, "n: ", n
-                ! binary(n:) = "1"
-                ! print *, "Binary: ", binary
+                !binary = "1" // binary
+                n = len_trim(binary) + 1
+                !print *, "n: ", n
+                binary(n:) = "1"
+                !print *, "Binary: ", binary
                 ! !binary(len_trim(binary)+1:) = "1"
             end if
         
             decimal = decimal / 2
         end do
 
-        n = len_trim(binary)
-        do i = 1,128-n
-            binary2(i:i) = "0"
+        do i = 1,len_trim(binary)
+            reversed(i:i) = binary(len_trim(binary)-i+1:len_trim(binary)-i+1)
         end do
 
-        binary2(len_trim(binary2)-n+1:) = binary
-        print *, "Binary: ", binary2(1:8), " ", binary2(9:16), " ", binary2(17:24), " ", binary2(25:32)
-        !print *, "Binary: ", binary
+        !print *, "Reversed: ", reversed
+
+        n = len_trim(adjustl(reversed))
+
+        !print *, "n: ", n
+        !print *, "Reversed: ", reversed, "*"
+        !do i = 1,128-n
+        !    binary2(i:i) = "0"
+        !end do
+
+        !print *, "Binary2: ", binary2
+
+        !binary2(len_trim(binary2)-n+1:) = trim(reversed)
+        !print *, "Binary: ", binary2(1:8), " ", binary2(9:16), " ", binary2(17:24), " ", binary2(25:32)
+        print *, "Binary: ", reversed
 
     end if
 end program binconvert
